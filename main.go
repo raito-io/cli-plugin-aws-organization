@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/hashicorp/go-hclog"
 	"github.com/raito-io/cli-plugin-aws-organization/aws"
 	"github.com/raito-io/cli/base"

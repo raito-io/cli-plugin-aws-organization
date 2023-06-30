@@ -3,7 +3,6 @@ package aws
 import (
 	"context"
 	"fmt"
-	"log"
 	"sync"
 
 	"github.com/aws/aws-sdk-go-v2/service/identitystore"
@@ -20,7 +19,7 @@ func (repo *AwsIdentityStoreRepository) getIdentityStoreClient(ctx context.Conte
 	cfg, err := GetAWSConfig(ctx, configMap)
 
 	if err != nil {
-		log.Fatalf("failed to load configuration, %v", err)
+		return nil, err
 	}
 
 	client := identitystore.NewFromConfig(cfg)
@@ -32,7 +31,7 @@ func (repo *AwsIdentityStoreRepository) getSSOClient(ctx context.Context, config
 	cfg, err := GetAWSConfig(ctx, configMap)
 
 	if err != nil {
-		log.Fatalf("failed to load configuration, %v", err)
+		return nil, err
 	}
 
 	client := sso.NewFromConfig(cfg)
@@ -83,13 +82,14 @@ func (repo *AwsIdentityStoreRepository) GetUsers(ctx context.Context, identitySt
 	var result []is.User
 
 	for _, identityStoreId := range identityStores {
+		isID := identityStoreId
 		moreObjectsAvailable := true
 		var nextToken *string
 
 		for moreObjectsAvailable {
 			input := identitystore.ListUsersInput{
 				NextToken:       nextToken,
-				IdentityStoreId: &identityStoreId,
+				IdentityStoreId: &isID,
 			}
 
 			response, err := client.ListUsers(ctx, &input)
@@ -101,13 +101,17 @@ func (repo *AwsIdentityStoreRepository) GetUsers(ctx context.Context, identitySt
 			nextToken = response.NextToken
 
 			wg := new(sync.WaitGroup)
-			for _, userFromList := range response.Users {
+
+			for i := range response.Users {
+				userFromList := response.Users[i]
+
 				wg.Add(1)
 
 				go func(user types.User, wg *sync.WaitGroup) {
 					defer wg.Done()
 
 					emailAddress := *user.UserName
+
 					for _, email := range user.Emails {
 						if email.Primary && email.Value != nil {
 							emailAddress = *email.Value
@@ -142,13 +146,14 @@ func (repo *AwsIdentityStoreRepository) GetGroups(ctx context.Context, identityS
 	parentMap := make(map[string][]string)
 
 	for _, identityStoreId := range identityStores {
+		isID := identityStoreId
 		moreObjectsAvailable := true
 		var nextToken *string
 
 		for moreObjectsAvailable {
 			input := identitystore.ListGroupsInput{
 				NextToken:       nextToken,
-				IdentityStoreId: &identityStoreId,
+				IdentityStoreId: &isID,
 			}
 
 			response, err := client.ListGroups(ctx, &input)
@@ -207,7 +212,7 @@ func (repo *AwsIdentityStoreRepository) addGroupToParentMap(ctx context.Context,
 			if um, f := memberShip.MemberId.(*types.MemberIdMemberUserId); f {
 				member := um.Value
 
-				parents, _ := parentMap[member]
+				parents := parentMap[member]
 				parentMap[member] = append(parents, *groupId)
 			}
 		}
