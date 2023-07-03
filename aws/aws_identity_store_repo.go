@@ -3,8 +3,6 @@ package aws
 import (
 	"context"
 	"fmt"
-	"sync"
-
 	"github.com/aws/aws-sdk-go-v2/service/identitystore"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
 	sso "github.com/aws/aws-sdk-go-v2/service/ssoadmin"
@@ -100,34 +98,24 @@ func (repo *AwsIdentityStoreRepository) GetUsers(ctx context.Context, identitySt
 			moreObjectsAvailable = response.NextToken != nil
 			nextToken = response.NextToken
 
-			wg := new(sync.WaitGroup)
-
 			for i := range response.Users {
-				userFromList := response.Users[i]
+				user := response.Users[i]
 
-				wg.Add(1)
+				emailAddress := *user.UserName
 
-				go func(user types.User, wg *sync.WaitGroup) {
-					defer wg.Done()
-
-					emailAddress := *user.UserName
-
-					for _, email := range user.Emails {
-						if email.Primary && email.Value != nil {
-							emailAddress = *email.Value
-						}
+				for _, email := range user.Emails {
+					if email.Primary && email.Value != nil {
+						emailAddress = *email.Value
 					}
+				}
 
-					result = append(result, is.User{
-						ExternalId: *user.UserId,
-						UserName:   *user.UserName,
-						Name:       *user.UserName,
-						Email:      emailAddress,
-					})
-				}(userFromList, wg)
+				result = append(result, is.User{
+					ExternalId: *user.UserId,
+					UserName:   *user.UserName,
+					Name:       *user.UserName,
+					Email:      emailAddress,
+				})
 			}
-
-			wg.Wait()
 		}
 	}
 
