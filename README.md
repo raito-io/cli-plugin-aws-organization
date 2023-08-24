@@ -20,11 +20,7 @@
 At this point, no contributions are accepted to the project yet.**
 
 This Raito CLI plugin is used to synchronize the identity store information of an AWS organization (IAM Identity Center).
-This identity store can then be linked to AWS account data sources so that permission sets can be visualized correctly.
-
-<!-- below, TODO -->
-
-## Unsupported features
+This identity store can then be linked to AWS Account data sources (or set as Master Identity Store) so that permission sets can be visualized correctly.
 
 
 ## Prerequisites
@@ -49,8 +45,9 @@ To use the plugin, add the following snippet to your Raito CLI configuration fil
 ```
 
 Next, replace the values of the indicated fields with your specific values, or use [environment variables](https://docs.raito.io/docs/cli/configuration):
-- `identity-store-id`: the ID of the Identity Store you created in Raito Cloud.
-- `aws-account-id`: the ID of the AWS account you want to sync. Make sure to remove the hyphens.
+- `identity-store-id`: The ID of the Identity Store you created in Raito Cloud.
+- `aws-profile` (optional): The AWS SDK profile to use for connecting to your AWS account that managed the organization to synchronize. When not specified, the default profile is used (or what is defined in the AWS_PROFILE environment variable).
+- `aws-region` (optional): The AWS region to use for connecting to the AWS account to synchronize. When not specified, the default region as found by the AWS SDK is used.
 
 You will also need to configure the Raito CLI further to connect to your Raito Cloud account, if that's not set up yet.
 A full guide on how to configure the Raito CLI can be found on (http://docs.raito.io/docs/cli/configuration).
