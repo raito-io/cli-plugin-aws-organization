@@ -9,20 +9,15 @@
 <p align="center">
     <a href="/LICENSE.md" target="_blank"><img src="https://img.shields.io/badge/license-Apache%202-brightgreen.svg" alt="Software License" /></a>
     <a href="https://github.com/raito-io/cli-plugin-aws-organization/actions/workflows/build.yml" target="_blank"><img src="https://github.com/raito-io/cli-plugin-aws-organization/actions/workflows/build.yml/badge.svg" alt="Build status"/></a>
-    <a href="https://codecov.io/gh/raito-io/cli-plugin-aws-organization" target="_blank"><img src="https://img.shields.io/codecov/c/github/raito-io/cli-plugin-aws-organization" alt="Code Coverage" /></a>
+    <!--a href="https://codecov.io/gh/raito-io/cli-plugin-aws-organization" target="_blank"><img src="https://img.shields.io/codecov/c/github/raito-io/cli-plugin-aws-organization" alt="Code Coverage" /></a-->
 </p>
 
 <hr/>
 
 # Raito CLI Plugin - AWS
 
-:rotating_light: :rotating_light: :rotating_light:
-
-**Note: This repository is still in a very early stage of development.  
-It contains code that will allow communication with Raito Cloud once it is released.
+**Note: This repository is still in an early stage of development.
 At this point, no contributions are accepted to the project yet.**
-
-:rotating_light: :rotating_light: :rotating_light:
 
 This Raito CLI plugin is used to synchronize the identity store information of an AWS organization (IAM Identity Center).
 This identity store can then be linked to AWS account data sources so that permission sets can be visualized correctly.
