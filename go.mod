@@ -10,7 +10,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/identitystore v1.16.13
 	github.com/aws/aws-sdk-go-v2/service/ssoadmin v1.16.12
 	github.com/hashicorp/go-hclog v1.5.0
-	github.com/raito-io/cli v0.50.0
+	github.com/raito-io/cli v0.52.1
+	github.com/stretchr/testify v1.8.4
 	github.com/vektra/mockery/v2 v2.35.3
 )
 
@@ -64,7 +65,6 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.17.0 // indirect
 	github.com/stretchr/objx v0.5.1 // indirect
-	github.com/stretchr/testify v1.8.4 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
