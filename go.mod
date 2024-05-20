@@ -5,29 +5,29 @@ go 1.22
 toolchain go1.22.0
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.26.1
-	github.com/aws/aws-sdk-go-v2/config v1.27.11
-	github.com/aws/aws-sdk-go-v2/service/identitystore v1.23.5
-	github.com/aws/aws-sdk-go-v2/service/ssoadmin v1.25.5
+	github.com/aws/aws-sdk-go-v2 v1.27.0
+	github.com/aws/aws-sdk-go-v2/config v1.27.15
+	github.com/aws/aws-sdk-go-v2/service/identitystore v1.23.8
+	github.com/aws/aws-sdk-go-v2/service/ssoadmin v1.25.8
 	github.com/hashicorp/go-hclog v1.6.3
-	github.com/raito-io/cli v0.64.1
+	github.com/raito-io/cli v0.65.1
 	github.com/stretchr/testify v1.9.0
-	github.com/vektra/mockery/v2 v2.42.2
+	github.com/vektra/mockery/v2 v2.42.3
 )
 
 require (
 	github.com/Masterminds/semver/v3 v3.2.1 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.11 // indirect
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.1 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.5 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.5 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.15 // indirect
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.3 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.7 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.7 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.0 // indirect
-	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.36.5 // indirect
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.37.0 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.11.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.11.7 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sso v1.20.5 // indirect
-	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.23.4 // indirect
-	github.com/aws/aws-sdk-go-v2/service/sts v1.28.6 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.11.9 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sso v1.20.8 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.24.2 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sts v1.28.9 // indirect
 	github.com/aws/smithy-go v1.20.2 // indirect
 	github.com/bcicen/jstream v1.0.1 // indirect
 	github.com/chigopher/pathlib v0.19.1 // indirect
