@@ -7,9 +7,11 @@
 </h4>
 
 <p align="center">
-    <a href="/LICENSE.md" target="_blank"><img src="https://img.shields.io/badge/license-Apache%202-brightgreen.svg" alt="Software License" /></a>
-    <a href="https://github.com/raito-io/cli-plugin-aws-organization/actions/workflows/build.yml" target="_blank"><img src="https://github.com/raito-io/cli-plugin-aws-organization/actions/workflows/build.yml/badge.svg" alt="Build status"/></a>
-    <!--a href="https://codecov.io/gh/raito-io/cli-plugin-aws-organization" target="_blank"><img src="https://img.shields.io/codecov/c/github/raito-io/cli-plugin-aws-organization" alt="Code Coverage" /></a-->
+    <a href="/LICENSE.md" target="_blank"><img src="https://img.shields.io/badge/license-Apache%202-brightgreen.svg?label=License" alt="Software License" /></a>
+    <img src="https://img.shields.io/github/v/release/raito-io/cli-plugin-aws-organization?sort=semver&label=Release&color=651FFF" />
+    <a href="https://github.com/raito-io/cli-plugin-aws-organization/actions/workflows/build.yml" target="_blank"><img src="https://img.shields.io/github/actions/workflow/status/raito-io/cli-plugin-aws-organization/build.yml?branch=main" alt="Build status" /></a>
+    <a href="https://codecov.io/gh/raito-io/cli-plugin-aws-organization" target="_blank"><img src="https://img.shields.io/codecov/c/github/raito-io/cli-plugin-aws-organization?label=Coverage" alt="Code Coverage" /></a>
+    <a href="https://golang.org/"><img src="https://img.shields.io/github/go-mod/go-version/raito-io/cli-plugin-aws-organization?color=7fd5ea" /></a>
 </p>
 
 <hr/>
@@ -68,3 +70,11 @@ $> raito run
 This will take the configuration from the `raito.yml` file (in the current working directory) and start a single synchronization.
 
 Note: if you have multiple targets configured in your configuration file, you can run only this target by adding `--only-targets aws-account` at the end of the command.
+
+## Authentication
+To authenticate the AWS plugin, the AWS default provider chain will be used:
+1. Environment variables: The environment variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN` are used.
+2. Shared credentials file. Credentials defined on `~/.aws/credentials` will be used. A profile can be defined with `aws-region`.
+3. If running on an Amazon EC2 instance, IAM role for Amazon EC2.
+
+More information can be found on the [AWS SDK documentation](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html#specifying-credentials).
