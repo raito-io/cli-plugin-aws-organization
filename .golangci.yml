@@ -43,7 +43,6 @@ linters-settings:
   gosec:
     excludes:
       - G404 # To be checked: Insecure random number source (rand)
-      - G602
 
   stylecheck:
     checks: [ "all", "-ST1003"] # ST1003: No underscores in package names should be fixed and removed?
@@ -60,19 +59,22 @@ linters-settings:
     skip-tests: true
     package-average: 0.0
 
+  exhaustive:
+    default-signifies-exhaustive: true
+
 linters:
   disable-all: true
   enable:
     - asasalint
     - bodyclose
-    - cyclop #To be enabled in the future
-    # - depguard #We should create a correct config to enabe depguard
+    - copyloopvar
+    - cyclop
+    #- depguard #We should create a correct config to enabe depguard
     - dogsled
     - dupl
     - dupword
     - durationcheck
     - errcheck
-    - exportloopref
     - exhaustive
     - forbidigo
     - goconst
@@ -106,11 +108,15 @@ linters:
 run:
   issues-exit-code: 1
   tests: false
+  skip-files:
+    - ".*mock.*\\.go$"
+    - ".*\\.pb\\.go$"
 
 output:
-  path-prefix: ""
+  path-prefix: ''
   sort-results: true
-  format: tab
-  print-issued-lines: false
+  formats:
+    - format: colored-line-number
+  print-issued-lines: true
   print-linter-name: true
   uniq-by-line: false
