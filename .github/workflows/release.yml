@@ -16,12 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Install Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v5
         with:
           go-version-file: "go.mod"
           check-latest: true
@@ -31,11 +31,11 @@ jobs:
         run: git config --global url."https://${{secrets.CI_SECRETS_TOKEN_USER}}:${{secrets.CI_SECRETS_TOKEN}}@github.com".insteadOf "https://github.com"
       
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v4
+        uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser
           version: latest
-          args: release --rm-dist
+          args: release --clean
         env:
           GORELEASER_CURRENT_TAG: ${{github.ref_name}}
           GITHUB_TOKEN: ${{ secrets.CI_SECRETS_TOKEN }}
